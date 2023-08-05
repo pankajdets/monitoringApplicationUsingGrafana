@@ -1,6 +1,6 @@
 FROM openjdk:17
 
-ENV JAR_FILE employee-management-system-*.jar
+ENV JAR_FILE monitoringApplicationUsingGrafana-*.jar
 ENV LANG C.UTF-8
 ENV TZ=Asia/Kolkata
 ENV CONFIG config
@@ -13,6 +13,8 @@ RUN mkdir -p /opt/mount/config
 
 
 EXPOSE 8080
+
+RUN mvn clean install
 
 #COPY your jar to container
 COPY /monitoringApplicationUsingGrafana/target/$JAR_FILE $PROJECT_HOME/
