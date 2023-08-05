@@ -26,5 +26,12 @@ services:
     networks:
       - grafananet
 
+  employeeManagementApplication:
+    build: ./
+    container_name: employee-management-application
+    ports:
+      - 8080:8080
+    networks:
+      - grafananet
 
 
