@@ -22,6 +22,8 @@ public class EmployeeService {
 
     public List<Employee> getAllEmployee(){
         log.info("Entered into getAllEmployee()");
+        log.debug("Entered into getAllEmployee()");
+        log.trace("Entered into getAllEmployee()");
         ArrayList<Employee> employeeList = new ArrayList<>();
         for(String id: employeeMap.keySet())
             employeeList.add(employeeMap.get(id));

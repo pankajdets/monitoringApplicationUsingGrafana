@@ -21,6 +21,8 @@ public class EmployeeController {
     @GetMapping("/healthCheck")
     public ResponseEntity<String> healthCheck(){
         log.info("Entered into Health Check Controller");
+        log.debug("Entered into Health Check Controller");
+        log.trace("Entered into Health Check Controller");
         return new ResponseEntity<>( "Application is Up and Running..", HttpStatus.OK);
     }
 
