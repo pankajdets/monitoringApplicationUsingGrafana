@@ -27,6 +27,7 @@ COPY $CONFIG/application.yml /opt/mount/config/
 #Launch the application
 WORKDIR $PROJECT_HOME
 
+
 ENTRYPOINT ["sh", "-c"]
 
 CMD ["java ${JVM} -jar $PROJECT_HOME/$JAR_FILE --spring.config.location=/opt/mount/config/application.yml"]
