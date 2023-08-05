@@ -2,6 +2,8 @@ package com.pankajdets.monitoringApplicationUsingGrafana.controller;
 
 import com.pankajdets.monitoringApplicationUsingGrafana.entity.Employee;
 import com.pankajdets.monitoringApplicationUsingGrafana.service.EmployeeService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,8 +16,11 @@ public class EmployeeController {
     @Autowired
     EmployeeService employeeService;
 
+    private static final Logger log = LoggerFactory.getLogger(EmployeeController.class);
+
     @GetMapping("/healthCheck")
     public ResponseEntity<String> healthCheck(){
+        log.info("Entered into Health Check Controller");
         return new ResponseEntity<>( "Application is Up and Running..", HttpStatus.OK);
     }
 
