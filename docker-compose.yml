@@ -38,11 +38,9 @@ services:
     image: grafana/loki:latest
     container_name: loki
     volumes:
-      - /home/pankaj_kumar_ray/monitoringApplicationUsingGrafana/src/main/java/com/pankajdets/monitoringApplicationUsingGrafana/config/loki: /etc/loki
+      - /home/pankaj_kumar_ray/monitoringApplicationUsingGrafana/src/main/java/com/pankajdets/monitoringApplicationUsingGrafana/config/loki:/etc/loki
     ports:
       - "3100:3100"
-    command: -config.file= /etc/loki/loki-config.yml
+    command: ["--config.file=/etc/loki/loki-config.yaml"]
     networks:
       - grafananet
-
-

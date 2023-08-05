@@ -24,4 +24,4 @@ COPY src .
 EXPOSE 8080
 
 # Run the Java application
-CMD ["java", "-jar", "monitoringApplicationUsingGrafana.jar", "--spring.config.location=/app/main/java/com/pankajdets/monitoringApplicationUsingGrafana/config/application.yml"]
+CMD ["java", "-jar", "monitoringApplicationUsingGrafana.jar", "--spring.config.location=/app/main/java/com/pankajdets/monitoringApplicationUsingGrafana/config/application.yaml"]
