@@ -45,11 +45,11 @@ services:
     networks:
       - grafananet
 
-  tempo:
-    image: grafana/tempo:1.5.0
-    container_name: tempo
-    command: ["--target=all", "--storage.trace.local.path=/var/tempo", "--multitenancy.enabled=false", "--search.enabled=true"]
-    ports:
-      - 4317:4317
-    networks:
-      - grafananet
+  # tempo:
+  #   image: grafana/tempo:1.5.0
+  #   container_name: tempo
+  #   command: ["--target=all", "--storage.trace.local.path=/var/tempo", "--multitenancy.enabled=false", "--search.enabled=true"]
+  #   ports:
+  #     - 4317:4317
+  #   networks:
+  #     - grafananet
