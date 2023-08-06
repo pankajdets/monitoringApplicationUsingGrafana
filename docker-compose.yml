@@ -7,8 +7,8 @@ services:
     container_name: grafana
     # extra_hosts: ['host.docker.internal: host-gateway']
     # user: "1761075855"
-    # volumes:
-    #   - ./config/grafana:/etc/grafana/provisioning/datasources
+    volumes:
+      - ./src/main/com/pankajdets/monitoringApplicationUsingGrafana/config/grafana:/etc/grafana/provisioning/datasources
     ports:
       - "3000:3000"
     networks:
@@ -20,7 +20,7 @@ services:
     # extra_hosts: ['host.docker.internal: host-gateway']
     command: ["--config.file=/etc/prometheus/prometheus.yaml", "--enable-feature=native-histograms"]
     volumes:
-      - /home/pankaj_kumar_ray/monitoringApplicationUsingGrafana/src/main/java/com/pankajdets/monitoringApplicationUsingGrafana/config/prometheus:/etc/prometheus
+      - ./src/main/java/com/pankajdets/monitoringApplicationUsingGrafana/config/prometheus:/etc/prometheus
     ports:
       - '9090:9090'
     networks:
@@ -38,9 +38,18 @@ services:
     image: grafana/loki:latest
     container_name: loki
     volumes:
-      - /home/pankaj_kumar_ray/monitoringApplicationUsingGrafana/src/main/java/com/pankajdets/monitoringApplicationUsingGrafana/config/loki:/etc/loki
+      - ./src/main/java/com/pankajdets/monitoringApplicationUsingGrafana/config/loki:/etc/loki
     ports:
       - "3100:3100"
     command: ["--config.file=/etc/loki/loki-config.yaml"]
+    networks:
+      - grafananet
+
+  tempo:
+    image: grafana/tempo:1.5.0
+    container_name: tempo
+    command: ["--target=all", "--storage.trace.local.path=/var/tempo", "--multitenancy.enabled=false", "--search.enabled=true"]
+    ports:
+      - 4317:4317
     networks:
       - grafananet

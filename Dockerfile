@@ -24,4 +24,4 @@ COPY src .
 EXPOSE 8080
 
 # Run the Java application
-CMD ["java", "-jar", "monitoringApplicationUsingGrafana.jar", "--spring.config.location=/app/main/java/com/pankajdets/monitoringApplicationUsingGrafana/config/application.yaml"]
+CMD ["java","-javaagent:/app/main/java/com/pankajdets/monitoringApplicationUsingGrafana/config/tempo/opentelemetry-javaagent.jar","-Dotel.exporter=otlp_span,prometheus","-Dotel.exporter.otlp.endpoint=http://localhost:4317","-Dotel.exporter.otlp.insecure=true","-Dotel.resource.attributes=service.name=employee-management-system", "-jar", "monitoringApplicationUsingGrafana.jar", "--spring.config.location=/app/main/java/com/pankajdets/monitoringApplicationUsingGrafana/config/application.yaml"]
