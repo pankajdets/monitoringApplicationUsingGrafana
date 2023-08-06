@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE configuration>
 <configuration>
+    <property name="LOG_PATH" value="src\main\resources\logs" />
+    <property name="FILE_LOG_PATTERN" value="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %X{id} %c{1} - %msg%n" />
 
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
+        <layout class="ch.qos.logback.classic.PatternLayout">
             <pattern>
-                %d{HH:mm:ss.SSS} %-5level %logger{36} %X{X-Request-ID} - %msg%n
+                %date [%X{REQUEST_ID}] %level [%thread] [%file:%line] %msg%n
             </pattern>
-        </encoder>
+        </layout>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>TRACE</level>
+        </filter>
     </appender>
 
     <appender name="LOKI" class="com.github.loki4j.logback.Loki4jAppender">
@@ -34,19 +39,21 @@
                     }
                 </pattern>
             </message>
+            <sortByTime>true</sortByTime>
         </format>
     </appender>
+
     <appender name="RollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>MyApp.log</file>
+        <file>${LOG_PATH}\MyApp.log</file>
         <encoder>
-            <pattern>%d [%thread] %-5level %-50logger{40} - %msg%n</pattern>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
         </encoder>
 
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-            <fileNamePattern>MyApp-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
-            <maxFileSize>1MB</maxFileSize>
+            <fileNamePattern>${LOG_PATH}\MyApp-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>1GB</maxFileSize>
             <maxHistory>30</maxHistory>
-            <totalSizeCap>10MB</totalSizeCap>
+            <totalSizeCap>10GB</totalSizeCap>
             <cleanHistoryOnStart>true</cleanHistoryOnStart>
         </rollingPolicy>
     </appender>
